@@ -1,16 +1,33 @@
 import { useState } from 'react'
-import './App.css'
-
+import {createBrowserRouter , RouterProvider} from 'react-router-dom'
+import Body from './components/Body'
+import HeroSection from './components/HeroSection'
+import Login from './components/login'
+import NotFoundPage from './components/404'
 function App() {
-  
-
+  const appRouter = createBrowserRouter([
+    {
+      path : "/",
+      element : <Body/>,
+      children : [
+        {
+          path : "/",
+          element : <HeroSection/>
+        },
+        {
+          path  : "/login",
+          element : <Login/>
+        },
+        {
+          path  : "*",
+          element : <NotFoundPage/>
+        }
+      ]
+    }
+  ])
   return (
-    <>
-      <div style={{padding: '20px', border: '1px solid #000', tr}}>
-        Hello World!
-      </div>
-    </>
+    <RouterProvider router={appRouter} />
   )
-}
+} 
 
 export default App
