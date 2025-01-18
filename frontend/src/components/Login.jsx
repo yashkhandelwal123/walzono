@@ -1,10 +1,18 @@
 import React, { useState, useRef } from "react";
+import {useNavigate} from 'react-router-dom'
+import axios from "axios";
+import {toast} from 'react-hot-toast'
+import { useDispatch } from "react-redux";
+import { getUser } from "../redux/userSlice";
+
 
 const Login = () => {
   const [isOpen, setIsOpen] = useState(true); // Manage modal state
   const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState("");
   const modalRef = useRef();
+  const Navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Open and close modal
   const toggleModal = () => {
@@ -14,6 +22,25 @@ const Login = () => {
   const submitHandler = async(e) => {
     e.preventDefault();
     console.log(email, password);
+    try {
+      const response = await axios.post("http://localhost:4000/api/user/login", {email , password},{
+        headers : {
+          "Content-Type" : "application/json"
+        },
+        withCredentials: true
+      });
+      if(response.data.success){
+        // console.log("here")
+        dispatch(getUser(response?.data?.user))
+        toast.success(response.data.message)
+        Navigate('/')
+      }
+      console.log(response);
+
+    } catch (error) {
+        toast.error(error.response.data.message)
+        console.log(error)
+    }
   };
 
   return (

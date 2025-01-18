@@ -1,11 +1,18 @@
 import React, { useState, useRef } from "react";
+import { useSelector } from "react-redux";
+import {toast} from 'react-hot-toast'
+import axios from "axios";
+import {useNavigate} from 'react-router-dom'
 
 const Signup = () => {
   const [isOpen, setIsOpen] = useState(true); // Manage modal state
   const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
   const modalRef = useRef();
+  const {location} = useSelector(store => store.user);
+  const Navigate = useNavigate();
 
   // Open and close modal
   const toggleModal = () => {
@@ -14,7 +21,26 @@ const Signup = () => {
 
   const submitHandler = async(e) => {
     e.preventDefault();
-    console.log(email, password);
+    // console.log(email, password , phone, name);
+    try {
+      const response = await axios.post("http://localhost:4000/api/user/register", {name , email , password, phone },{
+        headers : {
+          "Content-Type" : "application/json"
+        },
+        withCredentials: true
+      });
+      console.log(response);
+      if(response.data.success){
+        console.log("here")
+        toast.success(response.data.message)
+        Navigate('/login')
+      }
+      console.log(response);
+
+    } catch (error) {
+        toast.error(error.response.data.message)
+        console.log(error)
+    }
   };
 
   return (
@@ -49,6 +75,24 @@ const Signup = () => {
 
             {/* Form */}
             <form onSubmit={submitHandler}>
+
+            <div className="mb-4">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-black py-2"
+                >
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  placeholder="Enter your Name"
+                />
+              </div>
+
               {/* Email Input */}
               <div className="mb-4">
                 <label
@@ -99,7 +143,7 @@ const Signup = () => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-                  placeholder="Enter your email"
+                  placeholder="Enter your phone"
                 />
               </div>
 

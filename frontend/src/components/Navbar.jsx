@@ -2,6 +2,10 @@ import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 import { GoArrowUpRight } from "react-icons/go";
 import { SlArrowDown } from "react-icons/sl";
+import { useDispatch } from 'react-redux';
+import { addLocation } from '../redux/userSlice';
+import {useSelector} from 'react-redux'
+import { CgProfile } from "react-icons/cg";
 
 
 
@@ -10,6 +14,9 @@ const Navbar = () => {
   const [location, setLocation] = useState('');
   const [city, setCity] = useState('');
   const [error, setError] = useState('');
+  const dispatch = useDispatch();
+  const {user} = useSelector(store => store.user);
+
 
   useEffect(() => {
     // Function to get the user's location
@@ -60,6 +67,9 @@ const Navbar = () => {
     fetchLocation();
   }, []);
 
+
+  dispatch(addLocation(location));
+
   return (
     <div>
       <div className="navbar">
@@ -72,16 +82,36 @@ const Navbar = () => {
         <div className="flex-none">
         
         <div className=' flex items-center menu menu-horizontal '>
-        <span className='mx-5'>
+          <span className='mx-5'>
             <Link to='/add-parlour' className='flex items-center hover:rounded-md hover:bg-black hover:text-white px-6 py-2 text-lg text-black'>Add Parlour <GoArrowUpRight/></Link>
           </span>
-          <span className='mx-5'>
-            <Link to='/login' className='hover:rounded-md hover:bg-black hover:text-white px-6 py-2 text-lg text-black'>Login</Link>
-          </span>
-          <span className='mx-5'>
-            <Link to='/signup' className='hover:rounded-md hover:text-white hover:bg-black px-6 py-2 text-lg text-black'>SignUp</Link>
-          </span>
 
+          {!user ? ( 
+              <div>
+                <span className='mx-5'>
+                  <Link to='/login' className='hover:rounded-md hover:bg-black hover:text-white px-6 py-2 text-lg text-black'>Login</Link>
+                </span> 
+                <span className='mx-5'>
+                  <Link to='/signup' className='hover:rounded-md hover:text-white hover:bg-black px-6 py-2 text-lg text-black'>SignUp</Link>
+                </span> 
+              </div>
+          ) : (
+                // <span className='mr-8'>
+                //   <Link to='/' className='hover:rounded-md px-6 py-2 text-lg hover:bg-[#E3C0D0] text-black flex items-center'> <CgProfile class='mr-2' size={30}  /> {user?.name} <SlArrowDown size={12} className='mx-2 mt-1'/> </Link>
+                // </span>
+
+                <div className="dropdown dropdown-hover">
+                  <div tabIndex={0} role="button" className="hover:rounded-md px-6 py-2 text-lg hover:bg-[#E3C0D0] text-black flex items-center"><CgProfile class='mr-2' size={30}  /> {user?.name} <SlArrowDown size={12} className='mx-2 mt-1'/></div>
+                  <ul tabIndex={0} className="dropdown-content menu bg-black text-[#E3C0D0] rounded-box right-0 w-52 mt-5 shadow">
+                    <li><Link to='/profile'>Profile</Link></li>
+                    <li><Link to={'/logout'}>Logout</Link></li>
+                  </ul>
+                </div>
+
+
+          )}          
+
+        
         </div>
 
 
