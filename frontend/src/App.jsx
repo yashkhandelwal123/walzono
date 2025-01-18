@@ -4,6 +4,7 @@ import Body from './components/Body'
 import HeroSection from './components/HeroSection'
 import Login from './components/login'
 import NotFoundPage from './components/404'
+import Signup from './components/Signup'
 function App() {
   const appRouter = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ function App() {
         {
           path  : "/login",
           element : <Login/>
+        },
+        {
+          path  : "/signup",
+          element : <Signup/>
         },
         {
           path  : "*",

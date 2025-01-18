@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react";
 
-const Login = () => {
+const Signup = () => {
   const [isOpen, setIsOpen] = useState(true); // Manage modal state
   const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
   const modalRef = useRef();
 
   // Open and close modal
@@ -43,7 +44,7 @@ const Login = () => {
 
             {/* Title */}
             <h2 className="text-2xl font-bold text-gray-700 text-center mb-4">
-              Login
+              Create Account
             </h2>
 
             {/* Form */}
@@ -84,6 +85,24 @@ const Login = () => {
                 />
               </div>
 
+
+              <div className="mb-4">
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium text-black py-2"
+                >
+                  Phone No
+                </label>
+                <input
+                  type="text"
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  placeholder="Enter your email"
+                />
+              </div>
+
               {/* Submit Button */}
               {/* <button
                 type="submit"
@@ -96,7 +115,7 @@ const Login = () => {
                 type = "submit"
                 className="btn hover:bg-black hover:text-white w-full mt-4"
                 >
-                    Login !!
+                    Signup
                 </button>
 
             </form>
@@ -107,4 +126,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

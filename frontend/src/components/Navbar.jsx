@@ -1,14 +1,73 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 import { GoArrowUpRight } from "react-icons/go";
+import { SlArrowDown } from "react-icons/sl";
+
 
 
 const Navbar = () => {
+
+  const [location, setLocation] = useState('');
+  const [city, setCity] = useState('');
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    // Function to get the user's location
+    const fetchLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            // Fetch address using reverse geocoding API
+            fetch(
+              `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=e1c19473641242a3a2bc426ed5cae494`
+            )
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.results && data.results.length > 0) {
+                  setLocation(data.results[0].formatted);
+                  // console.log(data.results[0]);
+                  setCity(data.results[0].components.town + ', ' + data.results[0].components.state);
+                  // console.log(data.results[0].components.state_district);
+                } else {
+                  setError('Unable to fetch location details.');
+                }
+              })
+              .catch(() => setError('Failed to fetch location.'));
+          },
+          (err) => {
+            switch (err.code) {
+              case err.PERMISSION_DENIED:
+                setError('User denied the request for Geolocation.');
+                break;
+              case err.POSITION_UNAVAILABLE:
+                setError('Location information is unavailable.');
+                break;
+              case err.TIMEOUT:
+                setError('The request to get user location timed out.');
+                break;
+              default:
+                setError('An unknown error occurred.');
+                break;
+            }
+          }
+        );
+      } else {
+        setError('Geolocation is not supported by this browser.');
+      }
+    };
+
+    fetchLocation();
+  }, []);
+
   return (
     <div>
       <div className="navbar">
         <div className="flex-1">
           <Link to='/' className="btn btn-ghost text-xl font-bold">GlowWithUs</Link>
+          <span className='mx-8 flex items-center text-lg hover:bg-[#E3C0D0] p-3 rounded-lg'> {city.length === 0 ? 'Select Location' : city} <SlArrowDown size={12} className='mx-2 mt-1'/> </span>
+          {/* {console.log(location)} */}
+
         </div>
         <div className="flex-none">
         
