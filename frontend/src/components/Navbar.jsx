@@ -142,8 +142,10 @@
 
 // src/components/Navbar.js
 import React from "react";
-
+import { Link } from "react-router";
+import { useSelector } from "react-redux";
 const Navbar = () => {
+  const {user} = useSelector((store) => store.user);
   return (
     <div className="bg-black text-white px-4 py-4 flex justify-between items-center">
       {/* Logo */}
@@ -158,9 +160,14 @@ const Navbar = () => {
         <a href="#help" className="hover:text-gray-300">
           Help
         </a>
-        <button className="bg-gray-200 text-black px-4 py-2 rounded-md font-medium hover:bg-gray-300">
+
+        {user ? (
+            <div className=""> {user?.name}</div>
+        ) : (
+          <Link to={'/login'} className="bg-gray-200 text-black px-4 py-2 rounded-md font-medium hover:bg-gray-300">
           Log in
-        </button>
+        </Link>
+        )}
       </div>
     </div>
   );
