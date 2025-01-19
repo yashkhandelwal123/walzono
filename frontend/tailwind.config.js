@@ -9,6 +9,9 @@ export default {
       animation: {
         fadeIn: "fadeIn 0.3s ease-in-out",
       },
+      transitionTimingFunction: {
+        'in-out-expo': 'cubic-bezier(0.85, 0, 0.15, 1)',
+      },
       keyframes: {
         fadeIn: {
           from: { opacity: 0 },

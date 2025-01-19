@@ -1,18 +1,18 @@
 import React, { useState, useRef } from "react";
-import {useNavigate} from 'react-router-dom'
-import axios from "axios";
+import { useSelector } from "react-redux";
 import {toast} from 'react-hot-toast'
-import { useDispatch } from "react-redux";
-import { getUser } from "../redux/userSlice";
+import axios from "axios";
+import {useNavigate} from 'react-router-dom'
 
-
-const Login = () => {
+const Signup = () => {
   const [isOpen, setIsOpen] = useState(true); // Manage modal state
   const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
   const modalRef = useRef();
+  const {location} = useSelector(store => store.user);
   const Navigate = useNavigate();
-  const dispatch = useDispatch();
 
   // Open and close modal
   const toggleModal = () => {
@@ -21,19 +21,19 @@ const Login = () => {
 
   const submitHandler = async(e) => {
     e.preventDefault();
-    console.log(email, password);
+    // console.log(email, password , phone, name);
     try {
-      const response = await axios.post("http://localhost:4000/api/user/login", {email , password},{
+      const response = await axios.post("http://localhost:4000/api/user/register", {name , email , password, phone },{
         headers : {
           "Content-Type" : "application/json"
         },
         withCredentials: true
       });
+      console.log(response);
       if(response.data.success){
-        // console.log("here")
-        dispatch(getUser(response?.data?.user))
+        console.log("here")
         toast.success(response.data.message)
-        Navigate('/')
+        Navigate('/login')
       }
       console.log(response);
 
@@ -70,11 +70,29 @@ const Login = () => {
 
             {/* Title */}
             <h2 className="text-2xl font-bold text-gray-700 text-center mb-4">
-              Login
+              Create Account
             </h2>
 
             {/* Form */}
             <form onSubmit={submitHandler}>
+
+            <div className="mb-4">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-black py-2"
+                >
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  placeholder="Enter your Name"
+                />
+              </div>
+
               {/* Email Input */}
               <div className="mb-4">
                 <label
@@ -111,6 +129,24 @@ const Login = () => {
                 />
               </div>
 
+
+              <div className="mb-4">
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium text-black py-2"
+                >
+                  Phone No
+                </label>
+                <input
+                  type="text"
+                  id="phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                  placeholder="Enter your phone"
+                />
+              </div>
+
               {/* Submit Button */}
               {/* <button
                 type="submit"
@@ -123,7 +159,7 @@ const Login = () => {
                 type = "submit"
                 className="btn hover:bg-black hover:text-white w-full mt-4"
                 >
-                    Login !!
+                    Signup
                 </button>
 
             </form>
@@ -134,4 +170,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
