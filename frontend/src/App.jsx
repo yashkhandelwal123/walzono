@@ -5,6 +5,7 @@ import HeroSection from './components/HeroSection'
 import Login from './components/login'
 import NotFoundPage from './components/404'
 import Signup from './components/Signup'
+import Temp from './components/Temp'
 function App() {
   const appRouter = createBrowserRouter([
     {
