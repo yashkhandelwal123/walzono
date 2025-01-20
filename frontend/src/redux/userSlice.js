@@ -4,7 +4,10 @@ const userSlice = createSlice({
     name : 'user',
     initialState : {
         user : null,
-        location : "india"
+        location : "india",
+        partnerInfo : null,
+        partnerDocument : null,
+        partnerBankInfo : null
     },
     reducers : {
         // multiple actions here
@@ -13,9 +16,18 @@ const userSlice = createSlice({
         },
         addLocation:(state,action)=>{
             state.location = action.payload
+        },
+        getPartnerInfo:(state,action)=>{
+            state.partnerInfo = action.payload
+        },
+        getPartnerDocument:(state,action)=>{
+            state.partnerDocument = action.payload
+        },
+        getPartnerBankInfo:(state,action)=>{
+            state.partnerBankInfo = action.payload
         }
     }
 });
 
-export const {getUser , addLocation} = userSlice.actions;
+export const {getUser , addLocation , getPartnerBankInfo , getPartnerInfo , getPartnerDocument} = userSlice.actions;
 export default userSlice.reducer

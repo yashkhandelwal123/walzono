@@ -7,6 +7,10 @@ import NotFoundPage from './components/404'
 import Signup from './components/Signup'
 import Temp from './components/Temp'
 import {Toaster} from 'react-hot-toast'
+import LandingPage from './components/partners_component/landingPage'
+import Add_Partners1 from './components/partners_component/Add_Partners_Step1'
+import Add_Partners2 from './components/partners_component/Add_Partners_Step2'
+
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -32,6 +36,18 @@ function App() {
       path  : "/signup",
       element : <Signup/>
     },
+    {
+      path : "/add-partners",
+      element : <LandingPage/>
+    },
+    {
+      path : "/add-partner/step-1",
+      element : <Add_Partners1/>
+    },
+    {
+      path : "/add-partner/step-2",
+      element : <Add_Partners2/>
+    }
   ])
   return (
     <>

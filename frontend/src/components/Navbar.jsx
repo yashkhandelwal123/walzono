@@ -27,7 +27,7 @@
 //             const { latitude, longitude } = position.coords;
 //             // Fetch address using reverse geocoding API
 //             fetch(
-//               `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=e1c19473641242a3a2bc426ed5cae494`
+              // `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=e1c19473641242a3a2bc426ed5cae494`
 //             )
 //               .then((response) => response.json())
 //               .then((data) => {
@@ -154,9 +154,9 @@ const Navbar = () => {
       </div>
       {/* Navigation Links */}
       <div className="flex items-center space-x-8">
-        <a href="#browse" className="hover:text-gray-300">
-          Browse
-        </a>
+        <Link to={'/add-partners'} className="hover:text-gray-300">
+          Add Partners
+        </Link>
         <a href="#help" className="hover:text-gray-300">
           Help
         </a>

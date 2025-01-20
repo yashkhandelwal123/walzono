@@ -126,7 +126,7 @@ const HomeContent = () => {
               className="w-full h-48 object-cover rounded-md mb-2"
             />
             <h3 className="text-xl font-bold mb-1">Kids Party Makeup</h3>
-            <p className="text-gray-600 mb-2">Kind of Light Makeup</p>
+            <p className="text-gray-600 mb-2">Kind  Light Makeup</p>
             <button className="bg-black text-white px-4 py-2 rounded-md">Book Now</button>
             <button className="bg-gray-300 text-black px-4 py-2 rounded-md ml-2">View Details</button>
           </div>
