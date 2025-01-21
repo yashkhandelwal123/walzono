@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// const servicesProviderModel = require('./services.partner');
 
 const partnerSchema = new mongoose.Schema({
     personName: {
@@ -78,6 +79,10 @@ const partnerSchema = new mongoose.Schema({
             },
         },
     ],
+    services: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ServicesProvider',
+    }],
 }, { timestamps: true });
 
 module.exports = mongoose.model("Partner", partnerSchema);

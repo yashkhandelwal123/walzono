@@ -13,5 +13,6 @@ router.get('/logout',userController.logout);
 
 // partner routes
 router.post('/partner-register',registerPartner.registerPartner);
-
+router.post('/specific-service-partner',registerPartner.specificServicesProvided);
+router.post('/getAllServiceProvidersOfParticularService',registerPartner.getAllServiceProvidersOfParticularService);
 module.exports = router;
