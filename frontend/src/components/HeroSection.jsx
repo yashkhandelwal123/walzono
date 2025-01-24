@@ -47,6 +47,28 @@
 import React from "react";
 
 const HomeContent = () => {
+
+  const services = [
+    {
+      title: 'Face',
+      icon: <i className="fas fa-face"></i>,
+      img: "https://media.istockphoto.com/id/997567634/vector/woman-profile-line-icon.jpg?s=612x612&w=0&k=20&c=O2rxhhtLR1V6eBickRuZ8A85uA_hbeX612ygPunH2l4=",
+      service: 'Our face services include facials, makeups, and other treatments to make your face look its best.'
+    },
+    {
+      title: 'Hair',
+      icon: <i className="fas fa-hair"></i>,
+      img : "https://res.cloudinary.com/daf7blofc/image/upload/v1737703722/hair_1_qsyvto.png",
+      service: 'Our hair services include haircuts, coloring, and other treatments to make your hair look its best.'
+    },
+    {
+      title: 'Massage',
+      icon: <i className="fas fa-massage"></i>,
+        img: "https://cdn-icons-png.flaticon.com/512/3046/3046895.png",
+      service: 'Our massage services include Swedish massages, deep tissue massages, and other treatments to help you relax and feel your best.'
+    }
+  ];
+
   return (
 
     <div className="bg-gray-100">
@@ -58,7 +80,7 @@ const HomeContent = () => {
         <div className="relative text-center text-white px-4 max-w-4xl mb-40">
           {/* Main Heading */}
           <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-            Book a home makeup service in just a few clicks.
+            Book a home makeup service in just a few clicks
           </h1>
 
           {/* Search Box */}
@@ -85,7 +107,29 @@ const HomeContent = () => {
         </div>
       </div>
 
-      {/* Section 2 */}
+
+      {/* section 2 */}
+      <div className="bg-[#E5E7EB] px-4 py-4 w-full">
+        <h2 className="text-2xl bg-[#E5E7EB] font-bold mb-4">Services Categories</h2>
+        <div className='flex  justify-center items-center p-5 text-black w-full bg-[#E5E7EB]'>
+        <div className="grid grid-cols-3 gap-4">
+          {services.map((service, index) => (
+            <div key={index} className=" p-4 shadow-md rounded-lg w-full bg-white transition duration-500 hover:scale-105 mx-auto">
+              <img src={service.img} alt={service.title} className="w-full h-48 object-cover mb-4 rounded mix-blend-multiply" />
+              <h2 className="text-3xl w-full text-center p-4 font-bold">{service.title}</h2>
+              <div className="flex items-center">
+                {/* {service.icon} */}
+                <p className="ml-2 text-lg">{service.service}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        </div>
+
+      </div>
+
+
+      {/* Section 3 */}
       <div className="container mx-auto px-4 py-10">
         <h2 className="text-2xl font-bold mb-4">Popular in Your Area</h2>
         {/* <div className="flex space-x-4 mb-4">
@@ -147,7 +191,7 @@ const HomeContent = () => {
 
 
       {/* Section 3 */}
-      <div className="container mx-auto px-4 py-20 bg-white rounded-lg">
+      {/* <div className="container mx-auto px-4 py-20 bg-white rounded-lg">
         <h1 className="text-2xl font-bold mb-4">This week in Beauty Parlours</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="bg-white rounded-md shadow-md p-4">
@@ -195,7 +239,7 @@ const HomeContent = () => {
             <button className="bg-gray-300 text-black px-4 py-2 rounded-md ml-2">View Details</button>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <hr class="border border-gray-300" /> */}
 
 

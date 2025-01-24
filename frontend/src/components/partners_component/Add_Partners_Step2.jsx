@@ -115,7 +115,7 @@ const RegistrationSteps = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Restaurant information
+                  Parlour information
                 </h3>
                 <p className="text-gray-600">
                   Name, location and contact number
@@ -138,10 +138,10 @@ const RegistrationSteps = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Account information
+                Parlour operational details
                 </h3>
                 <p className="text-gray-600">
-                  Email, password and account type
+                  Services details, timing and images
                 </p>
                 <a href="#" className="text-blue-500 hover:text-blue-700">
                   Continue
@@ -162,10 +162,10 @@ const RegistrationSteps = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">
-                  Payment information
+                Parlour documents
                 </h3>
                 <p className="text-gray-600">
-                  Credit card details and billing address
+                  PAN details, GST details and Bank info
                 </p>
                 <a href="#" className="text-blue-500 hover:text-blue-700">
                   Continue

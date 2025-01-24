@@ -10,6 +10,8 @@ import {Toaster} from 'react-hot-toast'
 import LandingPage from './components/partners_component/landingPage'
 import Add_Partners1 from './components/partners_component/Add_Partners_Step1'
 import Add_Partners2 from './components/partners_component/Add_Partners_Step2'
+import Add_Partners3 from './components/partners_component/Add_Partners_Step3'
+import Services from './components/Services'
 
 
 function App() {
@@ -47,7 +49,15 @@ function App() {
     {
       path : "/add-partner/step-2",
       element : <Add_Partners2/>
-    }
+    },
+    {
+      path : "/add-partner/step-3",
+      element : <Add_Partners3/>
+    },
+    {
+      path : "/services",
+      element : <Services/>
+    },
   ])
   return (
     <>

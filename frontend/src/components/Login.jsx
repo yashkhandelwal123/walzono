@@ -180,7 +180,7 @@ function Login() {
             // console.log("here")
             dispatch(getUser(response?.data?.user))
             toast.success(response.data.message)
-            Navigate('/')
+            Navigate('/services')
           }
           console.log(response);
     
