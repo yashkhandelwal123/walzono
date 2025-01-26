@@ -1,5 +1,6 @@
 import React from 'react';
 import { IoStar } from "react-icons/io5";
+import { Link } from 'react-router';
 
 
 function SalonShowcase() {
@@ -80,9 +81,9 @@ function SalonShowcase() {
           </div>
 
           {/* book button */}
-          <button className="bg-black text-white px-4 py-2 rounded-lg">
+          <Link to={'/booking'} className="bg-black text-white px-4 py-2 rounded-lg">
             Continue to Book 
-          </button>
+          </Link>
 
           <div className='mt-4'>
             <span className='text-2xl font-bold'>Description</span>

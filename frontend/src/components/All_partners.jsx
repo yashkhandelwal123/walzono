@@ -80,8 +80,10 @@
 
 
 // src/PartnerDetail.js
+
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const partners = [
   {
@@ -144,6 +146,9 @@ const partners = [
 ];
 
 const PartnerDetail = () => {
+
+  const {id} = useParams();
+  console.log(id)
   return (
     <div className="p-6 bg-gray-100">
       <h2 className="text-3xl font-bold text-center mb-6">Our Partners</h2>

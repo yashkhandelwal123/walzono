@@ -12,8 +12,9 @@ import Add_Partners1 from './components/partners_component/Add_Partners_Step1'
 import Add_Partners2 from './components/partners_component/Add_Partners_Step2'
 import Add_Partners3 from './components/partners_component/Add_Partners_Step3'
 import Services from './components/Services'
-import All_partners from './components/All_partners'
+import PartnerDetail from './components/all_partners'
 import Select_partner from './components/Select_partner'
+import Booking from './components/Booking'
 
 
 function App() {
@@ -31,12 +32,16 @@ function App() {
           element : <NotFoundPage/>
         },
         {
-          path  : "/all-partners",
-          element : <All_partners/>
+          path  : "/services/:id",
+          element : <PartnerDetail/>
         },
         {
           path: "/partner/:id",
           element: <Select_partner/>
+        },
+        {
+          path : "/booking",
+          element : <Booking/>
         }
       ]
     },

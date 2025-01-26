@@ -73,7 +73,7 @@ const RegistrationSteps = () => {
 
       <div className="flex pt-10">
         {/* left side content box*/}
-        <div className="bg-white rounded-lg  h-fit shadow-lg p-6 mt-10 mx-20 border border-gray-300">
+        <div className="bg-white rounded-lg h-fit shadow-lg p-6 mt-10 mx-20 border border-gray-300">
           <h2 className="text-xl font-bold mb-4">Complete your registration</h2>
 
           <div className="flex flex-col items-start gap-4">
@@ -275,7 +275,24 @@ const RegistrationSteps = () => {
         </div> */}
 
     </div>
+
+    
   );
 };
 
 export default RegistrationSteps;
+
+
+
+
+
+{/* <div className="w-full">
+
+  <div className="w-1/3 flex">
+    <div className="w-full"> temp1</div> 
+    <div className="w-full">temp2</div>
+    <div className="w-full">temp3</div>
+  
+  </div>
+
+</div> */}

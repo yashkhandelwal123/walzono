@@ -46,10 +46,13 @@
 // src/components/HomeContent.js
 import React from "react";
 import { FaCut, FaSpa, FaHandHoldingWater, FaSmile, FaWind, FaPaintBrush, FaLeaf, FaBaby } from "react-icons/fa";
+import { Link } from "react-router";
+import { useSelector } from "react-redux";
 
 
 const HomeContent = () => {
 
+  const {user} = useSelector((state) => state.user)
   const services = [
     { icon: <FaCut className="text-xl text-black" />, label: "Haircuts" },
     // { icon: <FaSpa className="text-xl" />, label: "Spa Treatments" },
@@ -126,13 +129,14 @@ const HomeContent = () => {
 
             <div className="flex">
               {services.map((service, index) => (
-                <div
+                <Link
+                  to={!user ? '/login' : '/services/' + service.label}
                   key={index}
                   className="flex flex-col w-1/4 bg-[#ffffff] mx-auto items-center justify-center p-4 border rounded-md shadow-sm hover:shadow-lg transition-shadow"
                 >
                   <div className="text-primary mb-2">{service.icon}</div>
                   <p className="text-sm font-medium text-gray-700">{service.label}</p>
-                </div>
+                </Link>
               ))}
           </div>
         </div>
