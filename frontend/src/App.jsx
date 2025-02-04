@@ -42,6 +42,10 @@ function App() {
         {
           path : "/booking",
           element : <Booking/>
+        },
+        {
+          path : "/temp",
+          element : <Temp/>
         }
       ]
     },

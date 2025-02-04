@@ -153,7 +153,7 @@ const HomeContent = () => {
           <button className="bg-gray-200 px-4 py-2 rounded-md">This month</button>
         </div> */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white rounded-md shadow-md p-4">
+          <div className="bg-white rounded-md shadow-md p-4 transition duration-500 hover:scale-105">
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg2m8fPpP2IgOJx2yQNsgpT-w4OTsd84h3FQ&s"
               alt="Glow Up (Bridal)"
