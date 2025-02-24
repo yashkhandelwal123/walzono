@@ -7,7 +7,7 @@ import NotFoundPage from './components/404'
 import Signup from './components/Signup'
 import Temp from './components/Temp'
 import {Toaster} from 'react-hot-toast'
-import LandingPage from './components/partners_component/landingPage'
+import PartnersLandingPage from './components/partners_component/landingPage'
 import Add_Partners1 from './components/partners_component/Add_Partners_Step1'
 import Add_Partners2 from './components/partners_component/Add_Partners_Step2'
 import Add_Partners3 from './components/partners_component/Add_Partners_Step3'
@@ -15,7 +15,9 @@ import Services from './components/Services'
 import PartnerDetail from './components/all_partners'
 import Select_partner from './components/Select_partner'
 import Booking from './components/Booking'
-
+import Dashboard from './components/Dashboard'
+import LandingPage from './components/LandingPage'
+import Cart from './components/Cart'
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -46,8 +48,16 @@ function App() {
         {
           path : "/temp",
           element : <Temp/>
+        },
+        {
+          path : "/cart",
+          element : <Cart/>
         }
       ]
+    },
+    {
+      path : "/home",
+      element : <LandingPage/>
     },
     {
       path  : "/login",
@@ -59,7 +69,7 @@ function App() {
     },
     {
       path : "/add-partners",
-      element : <LandingPage/>
+      element : <PartnersLandingPage/>
     },
     {
       path : "/add-partner/step-1",
@@ -77,6 +87,10 @@ function App() {
       path : "/services",
       element : <Services/>
     },
+    {
+      path : "/dashboard",
+      element : <Dashboard/>
+    }
   ])
   return (
     <>

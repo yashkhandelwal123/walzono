@@ -141,34 +141,108 @@
 
 
 // src/components/Navbar.js
-import React from "react";
+
+
+import React, { useState } from "react";
 import { Link } from "react-router";
 import { useSelector } from "react-redux";
-const Navbar = () => {
-  const {user} = useSelector((store) => store.user);
-  return (
-    <div className="bg-black text-white px-4 py-4 flex justify-between items-center">
-      {/* Logo */}
-      <div className="text-2xl font-bold">
-        GlamBook
-      </div>
-      {/* Navigation Links */}
-      <div className="flex items-center space-x-8">
-        <Link to={'/add-partners'} className="hover:text-gray-300">
-          Add Partners
-        </Link>
-        <a href="#help" className="hover:text-gray-300">
-          Help
-        </a>
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { IoBagHandleOutline } from "react-icons/io5";
 
-        {user ? (
-            <div className=""> {user?.name}</div>
-        ) : (
-          <Link to={'/login'} className="bg-gray-200 text-black px-4 py-2 rounded-md font-medium hover:bg-gray-300">
-          Log in
-        </Link>
-        )}
+
+
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user } = useSelector((store) => store.user);
+
+  return (
+    <div className="relative">
+      {/* Main Navigation Bar */}
+      <div className="bg-black text-white px-4 py-4 flex justify-between items-center">
+        {/* Logo */}
+        <div className="text-2xl font-bold">GlamBook</div>
+
+        {/* Desktop Navigation Links */}
+        <div className="hidden md:flex items-center space-x-8">
+          <Link to="/add-partners" className="hover:text-gray-300">
+            Add Partners
+          </Link>
+          <a href="#help" className="hover:text-gray-300">
+            Help
+          </a>
+
+          <Link to="/cart">
+            <IoBagHandleOutline size={25}/>
+          </Link>
+
+          {user ? (
+            <div>{user?.name}</div>
+          ) : (
+            <Link
+              to="/login"
+              className="bg-gray-200 text-black px-4 py-2 rounded-md font-medium hover:bg-gray-300"
+            >
+              Log in
+            </Link>
+          )}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="flex items-center md:hidden">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="p-2 hover:text-gray-300 focus:outline-none"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+              />
+            </svg>
+          </button>
+        </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMenuOpen && (
+        <div className="md:hidden absolute top-full left-0 right-0 bg-black text-white px-4 py-2 z-10">
+          <Link
+            to="/add-partners"
+            className="block py-2 hover:text-gray-300"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Add Partners
+          </Link>
+          <a
+            href="#help"
+            className="block py-2 hover:text-gray-300"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Help
+          </a>
+          <Link to="/cart">
+              go to cart
+          </Link>
+          {user ? (
+            <div className="block py-2">{user?.name}</div>
+          ) : (
+            <Link
+              to="/login"
+              className="block mt-2 bg-gray-200 text-black px-4 py-2 rounded-md font-medium hover:bg-gray-300"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Log in
+            </Link>
+          )}
+        </div>
+      )}
     </div>
   );
 };

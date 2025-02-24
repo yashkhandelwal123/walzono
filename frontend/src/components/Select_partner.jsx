@@ -1,287 +1,156 @@
-import React from "react";
-import { IoStar } from "react-icons/io5";
-import { Link } from "react-router";
+"use client"
 
-function SalonShowcase() {
+import { Star } from "lucide-react"
+
+// const reviews = [
+//   {
+//     name: "Prakkash Satpute",
+//     date: "Feb 4, 2025",
+//     service: "For Skin brightening facial (O3+), Heater",
+//     review: "Bajrangilal Sharma did a good job. His hands are gentle on the face. I recommend him for male facial.",
+//     rating: 5,
+//   },
+//   {
+//     name: "Ankit Jain",
+//     date: "Feb 4, 2025",
+//     service: "For Skin brightening facial (O3+), Heater",
+//     review: "Great service and professional approach.",
+//     rating: 5,
+//   },
+// ];
+
+export default function Select_partner({ isOpen, onClose }) {
+  if (!isOpen) return null
+
   return (
-    <div className="container mx-auto p-4 bg-white">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className=''>
-          <img
-            src="https://m.media-amazon.com/images/I/81ADwG+gugL._AC_UF894,1000_QL80_.jpg"
-            alt="Salon Showcase"
-            className="w-full h-auto rounded-lg"
-          />
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg w-full max-w-4xl relative animate-in fade-in zoom-in duration-200">
+        {/* Close Button */}
+        <button onClick={onClose} className="absolute right-4 top-4 p-2 rounded-full hover:bg-gray-100">
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
 
-          {/* about section */}
-          <div className="container mx-auto px-4 py-12">
-              <h2 className="text-4xl font-bold mb-8">About the process</h2>
-              <div className="flex flex-col gap-6">
-                {/* first section in about */}
-                <div className="flex items-center gap-4">
-                  <div className="bg-gray-200 rounded-full p-2">
-                    <span className="text-gray-700 font-bold">1</span>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-medium mb-2">Consultation</h3>
-                    <p className="text-gray-600">
-                      Detailed consultation by the stylist to understand your preferences
-                      and suggest the best-suited cut
-                    </p>
-                  </div>
-                </div>
-                {/* second section in about */}
-                <div className="flex items-center gap-4">
-                  <div className="bg-gray-200 rounded-full p-2">
-                    <span className="text-gray-700 font-bold">2</span>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-medium mb-2">Haircut & styling</h3>
-                    <p className="text-gray-600">
-                      Top-class haircut followed by Schwarzkopf Osis Messup serum
-                      application to seal the look
-                    </p>
-                  </div>
-                </div>
-                {/* thrid section in about */}
-                <div className="flex items-center gap-4">
-                  <div className="bg-gray-200 rounded-full p-2">
-                    <span className="text-gray-700 font-bold">3</span>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-medium mb-2">Haircut & styling</h3>
-                    <p className="text-gray-600">
-                      Top-class haircut followed by Schwarzkopf Osis Messup serum
-                      application to seal the look
-                    </p>
-                  </div>
-                </div>
-              </div>
-          </div>
-
-        </div>
-        <div>
-          {/* name of salon */}
-          <div className='flex mx-auto '>
-            <h1 className="text-4xl font-bold mb-2">Salon Showcase Beauty Salon</h1>
-            <span className='flex items-center bg-green-500 px-2 py-1 mx-4 rounded-lg'>
-                <span className="mr-2 text-bold text-white text-xl">4.5</span>
-                <IoStar className="text-white" size={24} />
-              </span>
-          </div>
-
-          {/* address of salon */}
-          <p className="text-gray-600 mb-4"> Shri Ram ki Nangal via RIICO, Tonk Rd, Sitapura, Jaipur, Rajasthan 302022</p>
-
-          {/* price of service */}
-          <div className="flex mb-4 items-center">
-            <div className='text-2xl font-bold'> ₹1,749 <span className='text-gray-600 text-sm mx-1 line-through'>₹1,999</span> </div>
-            <span className='text-red-500 text-sm mx-1 text-bold'>79% off</span>
-          </div>
-
-          {/* book button */}
-          <Link to={'/booking'} className="bg-black text-white px-4 py-2 rounded-lg">
-            Continue to Book
-          </Link>
-
-          <div className='mt-4'>
-            <span className='text-2xl font-bold'>Description</span>
-            <div className='mt-4 text-gray-600 text-lg'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores repellat possimus placeat cupiditate amet nisi accusamus illo quis, fugiat recusandae eos accusantium neque praesentium sequi. Id repellat iure est ipsa deleniti eum pariatur itaque iusto quo. Incidunt voluptatum ea officiis libero numquam, eveniet eum natus, qui optio tempora doloribus cum mollitia ex sit quia vel impedit delectus perferendis ad eius dolor omnis, earum enim possimus.</div>
-          </div>
-
-          {/* review section */}
-
-          <div className="bg-white p-4 mt-20 rounded-lg">
-            <h2 className="text-4xl font-bold mb-4">All reviews</h2>
-            {/* <div className="flex space-x-4 mb-4">
-              <button className="bg-gray-200 px-4 py-2 rounded-md">Most detailed</button>
-              <button className="bg-gray-200 px-4 py-2 rounded-md">In my area</button>
-              <button className="bg-gray-200 px-4 py-2 rounded-md">Frequent users</button>
-            </div> */}
-            <div className="flex items-center justify-between mb-4">
+        <div className="grid md:grid-cols-[1fr,300px]">
+          {/* Main Content */}
+          <div className="p-6 overflow-auto max-h-[80vh]">
+            {/* Header Section */}
+            <div className="flex justify-between items-start mb-8">
               <div>
-                <h3 className="text-lg flex items-center font-bold mb-1">Aliasgar <span className='mx-6 bg-[#07794C] text-white flex items-center rounded-lg px-2'> <IoStar className="text-white mr-1"/> 3.9</span></h3>
-                <p className="text-gray-600 text-sm">Jan 21, 2025. For Haircut for men, 15 mins head massage, Beard Trim & Design, Skin brightening facial (Repechage), Aroma bomb pedicure</p>
-                <div className="text-gray-800 mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at, pariatur, suscipit ad, impedit qui sunt similique iste quos molestiae officia illo modi inventore quibusdam nam! Illum dolore itaque rerum.</div>
+                <h2 className="text-2xl font-semibold mb-2">Aroma bomb pedicure</h2>
+                <div className="flex items-center gap-2 mb-2">
+                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  <span className="font-medium">4.86</span>
+                  <span className="text-gray-500">(4K reviews)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl font-bold">₹1299</span>
+                  <span className="text-gray-500 line-through">₹1349</span>
+                  <span className="px-2 py-1 rounded-full text-sm bg-green-50 text-green-600">₹50 off</span>
+                </div>
+                <div className="text-gray-500 mt-1">1 hr 15 mins</div>
               </div>
+              <button
+                className="px-6 py-2 bg-black text-white rounded-md  transition-colors"
+                onClick={() => console.log("Add to cart")}
+              >
+                Add
+              </button>
             </div>
-              <hr class="border-gray-300 my-4" />
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h3 className="text-lg flex items-center font-bold mb-1">John Doe <span className='mx-6 bg-[#07794C] text-white flex items-center rounded-lg px-2'> <IoStar className="text-white mr-1"/> 4.3</span></h3>
-                <p className="text-gray-600 text-sm">Feb 15, 2025. Excellent service and friendly staff. Highly recommend!</p>
-                <div className="text-gray-800 mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio at, pariatur, suscipit ad, impedit qui sunt similique iste quos molestiae officia illo modi inventore quibusdam nam! Illum dolore itaque rerum.</div>
 
+            {/* Process Section */}
+            <div>
+              <h3 className="text-xl font-semibold mb-6">About the process</h3>
+              <div className="space-y-8">
+                {[
+                  {
+                    step: 1,
+                    title: "Preparation",
+                    description: "Wiping feet with a cloth followed by cutting and filing of nails to shape smile line",
+                  },
+                  {
+                    step: 2,
+                    title: "Soak & cuticle care",
+                    description:
+                      "Cuticle cream application on nails and dipping feet in warm water soaked with Cocoa orange bath bomb",
+                  },
+                  {
+                    step: 3,
+                    title: "Scraping & cleansing",
+                    description:
+                      "Removal of dead skin cells from heels & sole with Peditrix followed by cleansing feet till knees",
+                  },
+                  {
+                    step: 4,
+                    title: "Exfoliation",
+                    description:
+                      "Scrubbing feet till knees with tangy fresh scrub to gently exfoliate followed by cleaning of nails",
+                  },
+                ].map(({ step, title, description }) => (
+                  <div key={step} className="flex gap-4">
+                    <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+                      {step}
+                    </div>
+                    <div>
+                      <h4 className="font-medium mb-2">{title}</h4>
+                      <p className="text-gray-500">{description}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-
             </div>
           </div>
 
+
+          {/* Sidebar */}
+          <div className="border-l p-6">
+            <div className="mb-8 text-center">
+              <div className="w-24 h-24 mx-auto mb-4">
+                <img
+                  src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template,q_auto:low,f_auto/w_520,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/home-screen/1678118403717-007af5.jpeg"
+                  alt="Empty cart"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              {/* <p className="text-gray-500">No items in your cart</p> */}
+            </div>
+
+            <div className="space-y-6">
+              {/* <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="px-2 py-1 rounded-full text-sm bg-green-50">%</span>
+                  <h4 className="font-medium">Assured reward from CRED</h4>
+                </div>
+                <p className="text-gray-500 text-sm">On all online payments</p>
+                <button className="text-blue-600 text-sm mt-1 hover:underline">View More Offers</button>
+              </div> */}
+
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <h4 className="font-medium">UC Promise</h4>
+                  <img
+                    src="https://res.cloudinary.com/urbanclap/image/upload/t_high_res_template,q_auto:low,f_auto/w_520,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/home-screen/1678118403717-007af5.jpeg"
+                    alt="UC Promise"
+                    className="w-8 h-8 object-contain"
+                  />
+                </div>
+                <ul className="space-y-3">
+                  {["Verified Professionals", "Hassle Free Booking", "Transparent Pricing"].map((item, index) => (
+                    <li key={index} className="flex items-center gap-2 text-sm">
+                      <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    // <div className="container mx-auto p-4 bg-white">
-    //   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    //     <div>
-    //       <img
-    //         src="https://m.media-amazon.com/images/I/81ADwG+gugL._AC_UF894,1000_QL80_.jpg"
-    //         alt="Salon Showcase"
-    //         className="w-full h-auto rounded-lg"
-    //       />
-    //     </div>
-
-    //     <div>
-    //       {/* Salon Name */}
-    //       <div className="flex flex-col md:flex-row md:justify-between items-center mx-auto mb-4 space-y-4 md:space-y-0">
-    //         <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center md:text-left">
-    //           Salon Showcase Beauty Salon
-    //         </h1>
-    //         <span className="flex items-center bg-green-500 rounded-lg px-3 py-1 md:px-4 md:py-2 lg:px-5 lg:py-2">
-    //           <span className="mr-2 font-bold text-white text-lg md:text-xl lg:text-2xl">
-    //             4.5
-    //           </span>
-    //           <IoStar
-    //             className="text-white"
-    //             size={20}
-    //             md:size={24}
-    //             lg:size={28}
-    //           />
-    //         </span>
-    //       </div>
-
-    //       {/* Salon Address */}
-    //       <p className="text-gray-600 mb-4">
-    //         Shri Ram ki Nangal via RIICO, Tonk Rd, Sitapura, Jaipur, Rajasthan
-    //         302022
-    //       </p>
-
-    //       {/* Service Price */}
-    //       <div className="flex mb-4 items-center">
-    //         <div className="text-2xl font-bold">
-    //           ₹1,749{" "}
-    //           <span className="text-gray-600 text-sm mx-1 line-through">
-    //             ₹1,999
-    //           </span>
-    //         </div>
-    //         <span className="text-red-500 text-sm mx-1 font-bold">79% off</span>
-    //       </div>
-
-    //       {/* Booking Button */}
-    //       <Link
-    //         to={"/booking"}
-    //         className="bg-black text-white px-4 py-2 rounded-lg"
-    //       >
-    //         Continue to Book
-    //       </Link>
-
-    //       {/* Description */}
-    //       <div className="mt-4">
-    //         <span className="text-2xl font-bold">Description</span>
-    //         <div className="mt-4 text-gray-600 text-lg">
-    //           Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-    //           Asperiores repellat possimus placeat cupiditate amet nisi
-    //           accusamus illo quis, fugiat recusandae eos accusantium neque
-    //           praesentium sequi...
-    //         </div>
-    //       </div>
-
-    //       {/* About Section (Now below Description on mobile only) */}
-    //       <div className="container mx-auto px-4 py-12 mt-8 md:mt-0 md:col-start-1 md:col-span-1">
-    //         <h2 className="text-4xl font-bold mb-8">About the process</h2>
-    //         <div className="flex flex-col gap-6">
-    //           {/* First Section in About */}
-    //           <div className="flex items-center gap-4">
-    //             <div className="bg-gray-200 rounded-full p-2">
-    //               <span className="text-gray-700 font-bold">1</span>
-    //             </div>
-    //             <div>
-    //               <h3 className="text-xl font-medium mb-2">Consultation</h3>
-    //               <p className="text-gray-600">
-    //                 Detailed consultation by the stylist to understand your
-    //                 preferences and suggest the best-suited cut
-    //               </p>
-    //             </div>
-    //           </div>
-    //           {/* Second Section in About */}
-    //           <div className="flex items-center gap-4">
-    //             <div className="bg-gray-200 rounded-full p-2">
-    //               <span className="text-gray-700 font-bold">2</span>
-    //             </div>
-    //             <div>
-    //               <h3 className="text-xl font-medium mb-2">
-    //                 Haircut & styling
-    //               </h3>
-    //               <p className="text-gray-600">
-    //                 Top-class haircut followed by Schwarzkopf Osis Messup serum
-    //                 application to seal the look
-    //               </p>
-    //             </div>
-    //           </div>
-    //           {/* Third Section in About */}
-    //           <div className="flex items-center gap-4">
-    //             <div className="bg-gray-200 rounded-full p-2">
-    //               <span className="text-gray-700 font-bold">3</span>
-    //             </div>
-    //             <div>
-    //               <h3 className="text-xl font-medium mb-2">
-    //                 Haircut & styling
-    //               </h3>
-    //               <p className="text-gray-600">
-    //                 Top-class haircut followed by Schwarzkopf Osis Messup serum
-    //                 application to seal the look
-    //               </p>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-
-    //       {/* Reviews */}
-    //       <div className="bg-white p-4 mt-20 rounded-lg">
-    //         <h2 className="text-4xl font-bold mb-4">All reviews</h2>
-
-    //         <div className="flex items-center justify-between mb-4">
-    //           <div>
-    //             <h3 className="text-lg flex items-center font-bold mb-1">
-    //               Aliasgar{" "}
-    //               <span className="mx-6 bg-[#07794C] text-white flex items-center rounded-lg px-2">
-    //                 {" "}
-    //                 <IoStar className="text-white mr-1" /> 3.9
-    //               </span>
-    //             </h3>
-    //             <p className="text-gray-600 text-sm">
-    //               Jan 21, 2025. For Haircut for men, 15 mins head massage, Beard
-    //               Trim & Design, Skin brightening facial (Repechage), Aroma bomb
-    //               pedicure
-    //             </p>
-    //             <div className="text-gray-800 mt-4">
-    //               Lorem ipsum dolor sit amet consectetur adipisicing elit...
-    //             </div>
-    //           </div>
-    //         </div>
-    //         <hr className="border-gray-300 my-4" />
-    //         <div className="flex items-center justify-between mb-4">
-    //           <div>
-    //             <h3 className="text-lg flex items-center font-bold mb-1">
-    //               John Doe{" "}
-    //               <span className="mx-6 bg-[#07794C] text-white flex items-center rounded-lg px-2">
-    //                 {" "}
-    //                 <IoStar className="text-white mr-1" /> 4.3
-    //               </span>
-    //             </h3>
-    //             <p className="text-gray-600 text-sm">
-    //               Feb 15, 2025. Excellent service and friendly staff. Highly
-    //               recommend!
-    //             </p>
-    //             <div className="text-gray-800 mt-4">
-    //               Lorem ipsum dolor sit amet consectetur adipisicing elit...
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-  );
+  )
 }
 
-export default SalonShowcase;

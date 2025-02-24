@@ -2,6 +2,7 @@ import React from 'react'
 import { Outlet } from 'react-router'
 import Navbar from './Navbar'
 import Footer from './Footer'
+
 import {Toaster} from 'react-hot-toast'
 
 const Body = () => {
@@ -12,6 +13,7 @@ const Body = () => {
       <Outlet/>
       <Footer/>
       <Toaster/>
+
     </div>
   )
 }

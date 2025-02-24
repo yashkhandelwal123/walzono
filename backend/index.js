@@ -19,8 +19,7 @@ app.use(cors(corsOptions));
 
 // router mounting...
 app.use('/api/user', require('./routes/user.route'));
-
-
+// app.use('/api/user', require('./routes/user.route'));
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
