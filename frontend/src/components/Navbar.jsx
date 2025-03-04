@@ -144,37 +144,47 @@
 
 
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoBagHandleOutline } from "react-icons/io5";
-
-
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user } = useSelector((store) => store.user);
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       {/* Main Navigation Bar */}
       <div className="bg-black text-white px-4 py-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="text-2xl font-bold">GlamBook</div>
+        <div className="text-2xl font-bold">Walzono</div>
+
+        {/* Search Bar - Hidden on Small Screens */}
+        <div className="hidden md:flex w-1/2">
+          <form className="flex w-full">
+            <input
+              type="text"
+              placeholder="Search for service"
+              className="w-full px-4 py-2 text-black bg-white rounded-l-md focus:outline-none"
+            />
+            <button
+              type="submit"
+              className="px-6 py-2 bg-gray-800 text-white font-medium rounded-r-md hover:bg-gray-900"
+            >
+              Search
+            </button>
+          </form>
+        </div>
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center space-x-8">
           <Link to="/add-partners" className="hover:text-gray-300">
             Add Partners
           </Link>
-          <a href="#help" className="hover:text-gray-300">
-            Help
-          </a>
-
+          <a href="#help" className="hover:text-gray-300">Help</a>
           <Link to="/cart">
-            <IoBagHandleOutline size={25}/>
+            <IoBagHandleOutline size={25} />
           </Link>
-
           {user ? (
             <div>{user?.name}</div>
           ) : (
@@ -188,7 +198,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="flex items-center md:hidden">
+        <div className="md:hidden flex items-center">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="p-2 hover:text-gray-300 focus:outline-none"
@@ -212,30 +222,30 @@ const Navbar = () => {
 
       {/* Mobile Menu Dropdown */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-black text-white px-4 py-2 z-10">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-black text-white px-4 py-2 z-10 flex flex-col space-y-2">
           <Link
             to="/add-partners"
-            className="block py-2 hover:text-gray-300"
+            className="py-2 hover:text-gray-300"
             onClick={() => setIsMenuOpen(false)}
           >
             Add Partners
           </Link>
           <a
             href="#help"
-            className="block py-2 hover:text-gray-300"
+            className="py-2 hover:text-gray-300"
             onClick={() => setIsMenuOpen(false)}
           >
             Help
           </a>
-          <Link to="/cart">
-              go to cart
+          <Link to="/cart" className="py-2" onClick={() => setIsMenuOpen(false)}>
+            Go to Cart
           </Link>
           {user ? (
-            <div className="block py-2">{user?.name}</div>
+            <div className="py-2">{user?.name}</div>
           ) : (
             <Link
               to="/login"
-              className="block mt-2 bg-gray-200 text-black px-4 py-2 rounded-md font-medium hover:bg-gray-300"
+              className="mt-2 bg-gray-200 text-black px-4 py-2 rounded-md font-medium hover:bg-gray-300"
               onClick={() => setIsMenuOpen(false)}
             >
               Log in

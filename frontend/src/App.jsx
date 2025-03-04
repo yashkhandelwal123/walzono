@@ -18,6 +18,7 @@ import Booking from './components/Booking'
 import Dashboard from './components/Dashboard'
 import LandingPage from './components/LandingPage'
 import Cart from './components/Cart'
+import ApplicationUnderReview from './components/partners_component/ApplicationUnderReview'
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -52,7 +53,11 @@ function App() {
         {
           path : "/cart",
           element : <Cart/>
-        }
+        },
+        {
+          path : "/applicationUnderReview",
+          element : <ApplicationUnderReview/>
+        },
       ]
     },
     {

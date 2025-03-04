@@ -15,4 +15,6 @@ router.get('/logout',userController.logout);
 router.post('/partner-register',registerPartner.registerPartner);
 router.post('/specific-service-partner',registerPartner.specificServicesProvided);
 router.post('/getAllServiceProvidersOfParticularService',registerPartner.getAllServiceProvidersOfParticularService);
+
+router.post('/send-email',userController.send);
 module.exports = router;

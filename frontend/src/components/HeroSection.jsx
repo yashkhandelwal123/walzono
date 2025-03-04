@@ -1,40 +1,40 @@
-// import React from 'react'
-// import { Link } from 'react-router'
-// import { useSelector } from 'react-redux'
-// import { useNavigate } from 'react-router'
+// // import React from 'react'
+// // import { Link } from 'react-router'
+// // import { useSelector } from 'react-redux'
+// // import { useNavigate } from 'react-router'
 
-// const HeroSection = () => {
+// // const HeroSection = () => {
 
-//   const {user} = useSelector((state) => state.user)
-//   const Navigate = useNavigate();
+// //   const {user} = useSelector((state) => state.user)
+// //   const Navigate = useNavigate();
 
-//   return (
-//     <div className="hero min-h-screen">
-//         <div className="hero-content flex-col lg:flex-row-reverse">
-//             <img
-//             // src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
-//             src='https://media.istockphoto.com/id/2177118708/photo/cosmetic-make-up-brush.jpg?s=612x612&w=0&k=20&c=wwyyOg5xSYpEcgLH-b02YdtaNG-ZM6hfdIbfBsHtQsw='
-//             className="max-w-sm rounded-lg shadow-2xl" />
-//             <div>
-//             <h1 className="text-5xl font-bold">Enhance Your Beauty</h1>
-//             <p className="py-6 text-lg" style={{fontFamily: 'cursive'}}>
-//               {/* "A seamless platform connecting customers with beauty parlors for personalized makeup services. Users can browse parlors, explore makeup categories like HD, Bridal, and Lite Makeup with pricing, and book appointments effortlessly for their preferred date and time." */}
+// //   return (
+// //     <div className="hero min-h-screen">
+// //         <div className="hero-content flex-col lg:flex-row-reverse">
+// //             <img
+// //             // src="https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp"
+// //             src='https://media.istockphoto.com/id/2177118708/photo/cosmetic-make-up-brush.jpg?s=612x612&w=0&k=20&c=wwyyOg5xSYpEcgLH-b02YdtaNG-ZM6hfdIbfBsHtQsw='
+// //             className="max-w-sm rounded-lg shadow-2xl" />
+// //             <div>
+// //             <h1 className="text-5xl font-bold">Enhance Your Beauty</h1>
+// //             <p className="py-6 text-lg" style={{fontFamily: 'cursive'}}>
+// //               {/* "A seamless platform connecting customers with beauty parlors for personalized makeup services. Users can browse parlors, explore makeup categories like HD, Bridal, and Lite Makeup with pricing, and book appointments effortlessly for their preferred date and time." */}
 
-//               "Introducing a comprehensive platform designed to simplify makeup service bookings for customers and enhance visibility for beauty parlors. Users begin by creating an account, selecting their role as either a customer or a seller. As a customer, they gain access to a curated list of beauty parlors tailored to their preferences, complete with ratings, locations, and detailed profiles. Upon selecting a parlor, they can browse various makeup services, including HD Makeup, Bridal Makeup, and Lite Makeup, along with transparent pricing. Customers can then book an appointment seamlessly by choosing their desired service, date, and time. 
+// //               "Introducing a comprehensive platform designed to simplify makeup service bookings for customers and enhance visibility for beauty parlors. Users begin by creating an account, selecting their role as either a customer or a seller. As a customer, they gain access to a curated list of beauty parlors tailored to their preferences, complete with ratings, locations, and detailed profiles. Upon selecting a parlor, they can browse various makeup services, including HD Makeup, Bridal Makeup, and Lite Makeup, along with transparent pricing. Customers can then book an appointment seamlessly by choosing their desired service, date, and time. 
 
-//               For beauty parlors, the platform serves as an all-in-one solution to showcase their services, manage bookings, and connect with a broader audience. With its user-friendly interface, intuitive design, and efficient booking process, the platform ensures a smooth and delightful experience for both customers and sellers in the makeup and beauty industry."
+// //               For beauty parlors, the platform serves as an all-in-one solution to showcase their services, manage bookings, and connect with a broader audience. With its user-friendly interface, intuitive design, and efficient booking process, the platform ensures a smooth and delightful experience for both customers and sellers in the makeup and beauty industry."
         
 
-//             </p>
-//             {/* <button onClick={!user ? (Navigate('/login')) : (Navigate('/hello'))} className="btn hover:bg-black hover:text-white">Explore Now !!</button> */}
-//             <Link to={!user ? '/login' : '/hello'} className="btn hover:bg-black hover:text-white">Explore Now !!</Link>
-//             </div>
-//         </div>
-//     </div>
-//   )
-// }
+// //             </p>
+// //             {/* <button onClick={!user ? (Navigate('/login')) : (Navigate('/hello'))} className="btn hover:bg-black hover:text-white">Explore Now !!</button> */}
+// //             <Link to={!user ? '/login' : '/hello'} className="btn hover:bg-black hover:text-white">Explore Now !!</Link>
+// //             </div>
+// //         </div>
+// //     </div>
+// //   )
+// // }
 
-// export default HeroSection
+// // export default HeroSection
 
 
 
@@ -44,7 +44,7 @@
 
 
 // src/components/HomeContent.js
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { FaCut, FaSpa, FaHandHoldingWater, FaSmile, FaWind, FaPaintBrush, FaLeaf, FaBaby } from "react-icons/fa";
 import { Link } from "react-router";
 import { useSelector } from "react-redux";
@@ -72,40 +72,53 @@ const HomeContent = () => {
         
         <div className="relative bg-cover bg-center h-screen flex items-center justify-center">
           {/* Background image */}
-          <img src="https://res.cloudinary.com/daf7blofc/image/upload/v1737300676/download_kpmls4.webp" alt="background" className="absolute inset-0 object-cover w-full h-full filter blur-sm" />
+
+
+          {/* <div className="diff h-screen">
+            <div className="diff-item-1">
+              <div className="bg-[#2D2D2D] text-[#FFC857] grid place-content-center text-9xl font-black">
+                Walzono
+              </div>
+            </div>
+            <div className="diff-item-2">
+              <div className="bg-[#FFC857] grid place-content-center text-9xl font-black">Walzono</div>
+            </div>
+            <div className="diff-resizer"></div>
+          </div> */}
+
+          <section className="">
+              {/* <img src="https://res.cloudinary.com/daf7blofc/image/upload/v1737300676/download_kpmls4.webp" alt="background" className="absolute inset-0 object-cover w-full h-full filter blur-sm" /> */}
+            
+            <div className="absolute inset-0 flex items-center px-20 z-20">
+              <div className="container">
+                <div className="max-w-lg space-y-6">
+                  <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+                    Professional Home Services at Your Doorstep
+                  </h1>
+                  <p className="text-lg text-muted-foreground">
+                    From cleaning to repairs, we bring expert services to your home with just a few clicks.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <button className="inline-flex bg-black items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-white h-11 px-8 w-full sm:w-auto">
+                      Book a Service
+                    </button>
+                    <button className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-black text-white hover:text-accent-foreground h-11 px-8 w-full sm:w-auto">
+                      Learn More
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+
+          
 
           {/* Overlay */}
           <div className="absolute inset-0 bg-black bg-opacity-20"></div>
 
-          {/* Content */}
-          <div className="relative text-center text-white px-4 max-w-4xl mb-40">
-            {/* Main Heading */}
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-              Book a home makeup service in just a few clicks
-            </h1>
-
-            {/* Search Box */}
-            <div className="mt-8">
-              <form className="flex justify-center items-center">
-                <input
-                  type="text"
-                  placeholder="Search for service"
-                  className="w-full max-w-6xl px-4 py-4 text-black bg-white rounded-l-md focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-4 bg-black text-white font-medium rounded-r-md hover:bg-gray-900"
-                >
-                  Search
-                </button>
-              </form>
-            </div>
-
-            {/* Subtext */}
-            <p className="mt-4 text-lg">
-              Find your perfect look with the best makeup artists in town
-            </p>
-          </div>
+          
         </div>
 
 
@@ -338,13 +351,3 @@ export default HomeContent;
 
 
 
-
-// import React from 'react';
-
-// function PopularInYourArea() {
-//   return (
-    
-//   );
-// }
-
-// export default PopularInYourArea;

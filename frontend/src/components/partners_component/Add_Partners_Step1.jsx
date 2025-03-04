@@ -54,7 +54,7 @@ const RegistrationSteps = () => {
       <nav className="bg-white shadow-md fixed w-full">
         <div className="mx-4 lg:mx-20 px-4 py-3 flex justify-between items-center">
           <h1 className="text-xl lg:text-2xl font-bold text-gray-800">
-            GlamBook
+            Walzono
           </h1>
         </div>
       </nav>

@@ -34,13 +34,13 @@ const LandingPage = () => {
       {/* navbar */}
       <nav className="bg-white shadow-md fixed w-full">
         <div className=" mx-20 px-4 py-3 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-800">GlamBook</h1>
+          <h1 className="text-2xl font-bold text-gray-800">Walzono</h1>
         </div>
       </nav>
 
       <div className="container mx-auto px-4 pt-28 w-full text-center">
         <h1 className="text-4xl font-bold text-black mb-4">
-          Partner with GlamBook
+          Partner with Walzono
         </h1>
         <h2 className="text-4xl font-bold text-black mb-8">
           and grow your business
