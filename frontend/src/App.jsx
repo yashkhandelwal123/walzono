@@ -19,6 +19,7 @@ import Dashboard from './components/Dashboard'
 import LandingPage from './components/LandingPage'
 import Cart from './components/Cart'
 import ApplicationUnderReview from './components/partners_component/ApplicationUnderReview'
+import AppDashBoard from './components/dashboard/AppDashBoard'
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -94,7 +95,7 @@ function App() {
     },
     {
       path : "/dashboard",
-      element : <Dashboard/>
+      element : <AppDashBoard/>
     }
   ])
   return (
