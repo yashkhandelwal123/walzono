@@ -1,13 +1,14 @@
 import React from 'react';
 // Note: Import icons from your icon library
-// import { DashboardIcon, OrdersIcon, PaymentsIcon, ServicesIcon } from './icons';
+import { LayoutDashboard, ShoppingCart, IndianRupee, CircleFadingPlus, CircleUser } from 'lucide-react';
 
 const Sidebar = ({ activeTab, setActiveTab }) => {
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: null }, // Replace with actual icon
-    { id: 'orders', label: 'Orders', icon: null },       // Replace with actual icon
-    { id: 'payments', label: 'Payments', icon: null },   // Replace with actual icon
-    { id: 'services', label: 'Services', icon: null },   // Replace with actual icon
+    { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard }, // Replace with actual icon
+    { id: 'orders', label: 'Orders', icon: ShoppingCart },       // Replace with actual icon
+    { id: 'payments', label: 'Payments', icon: IndianRupee },   // Replace with actual icon
+    { id: 'services', label: 'Services', icon: CircleFadingPlus },   // Replace with actual icon
+    { id: 'profile', label: 'Profile', icon: CircleUser },
   ];
 
   return (

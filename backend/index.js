@@ -10,19 +10,18 @@ require('./config/db')();
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
-app.use(express.urlencoded({extended : true}));
-app.use(express.json());
 app.use(cookieParser());
 const corsOptions = {
     origin : "http://localhost:5173",
     credentials : true
 }
 app.use(cors(corsOptions));
-
+app.use(express.json());
+app.use(express.urlencoded({extended : true}));
 
 // router mounting...
 app.use('/api/user', require('./routes/user.route'));
-// app.use('/api/user', require('./routes/user.route'));
+app.use('/api/partner', require('./routes/partner.route'));
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPartnerDocument, getPartnerInfo } from "../../redux/userSlice";
+import { getPartnerDocument, getPartnerInfo } from "../../../redux/userSlice";
 import { FaImage } from "react-icons/fa";
 import { useNavigate } from "react-router";
 

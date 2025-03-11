@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user.controller');
-const registerPartner = require('../Apis/Partner.registration');
-// import { registerPartner } from '../Apis/Partner.registration';
+const {upload} = require('../middlewares/multer.middleware');
+const partnerController = require('../controllers/partner.controller');
 
 
 // user routes
@@ -11,10 +11,7 @@ router.post('/user-register',userController.register);
 router.post('/login',userController.login);
 router.get('/logout',userController.logout);
 
-// partner routes
-router.post('/partner-register',registerPartner.registerPartner);
-router.post('/specific-service-partner',registerPartner.specificServicesProvided);
-router.post('/getAllServiceProvidersOfParticularService',registerPartner.getAllServiceProvidersOfParticularService);
 
+// testing email
 router.post('/send-email',userController.send);
 module.exports = router;

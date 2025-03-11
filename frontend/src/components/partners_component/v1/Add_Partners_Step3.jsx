@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch , useSelector } from "react-redux";
-import { getPartnerBankInfo, getPartnerDocument, getPartnerInfo } from "../../redux/userSlice";
+import { getPartnerBankInfo, getPartnerDocument, getPartnerInfo } from '../../../redux/userSlice';
+// import { getPartnerBankInfo } from "../../../redux/userSlice";
 import { Link } from "react-router";
 import { FaImage } from "react-icons/fa";
 import { useNavigate } from "react-router";
@@ -332,7 +333,7 @@ const RegistrationSteps = () => {
   
         </div>
   
-      </div>)}
+      </div>)    }
     </>
   );
 };

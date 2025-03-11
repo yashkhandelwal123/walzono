@@ -65,7 +65,6 @@ exports.getAllServiceProvidersOfParticularService = async (req, res) => {
 
 
 
-
 exports.specificServicesProvided = async (req, res) => {
     const {name} = req.body;
     try {

@@ -29,28 +29,32 @@
 import { useState } from "react";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router";
+import { selectCartItems } from "../redux/cartSlice";
+import { useSelector } from "react-redux";
+import { ShoppingCart, ArrowLeft } from 'lucide-react';
 
-const initialCart = [
-  {
-    id: 1,
-    name: "Grey Parachute Pants",
-    price: 1499,
-    size: "S",
-    color: "Grey",
-    quantity: 1,
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-MjlF52S90jM8IgQhTKviC8VWphSlY8.png",
-  },
-  {
-    id: 2,
-    name: "Everyday Hoodie - Jungle Green",
-    price: 1499,
-    size: "Small",
-    quantity: 2,
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-MjlF52S90jM8IgQhTKviC8VWphSlY8.png",
-  },
-];
+// const initialCart = [
+//   {
+//     id: 1,
+//     name: "Grey Parachute Pants",
+//     price: 1499,
+//     size: "S",
+//     color: "Grey",
+//     quantity: 1,
+//     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-MjlF52S90jM8IgQhTKviC8VWphSlY8.png",
+//   },
+//   {
+//     id: 2,
+//     name: "Everyday Hoodie - Jungle Green",
+//     price: 1499,
+//     size: "Small",
+//     quantity: 2,
+//     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-MjlF52S90jM8IgQhTKviC8VWphSlY8.png",
+//   },
+// ];
 
-export default function ShoppingCart() {
+export default function ShoppingCarts() {
+  const initialCart = useSelector(selectCartItems);
   const [cart, setCart] = useState(initialCart);
   const navigate = useNavigate();
 
@@ -67,6 +71,38 @@ export default function ShoppingCart() {
   };
 
   const totalAmount = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  if(cart.length === 0) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center">
+          <div className="flex justify-center">
+            <div className="relative">
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-gray-100 rounded-full" />
+              <ShoppingCart className="w-16 h-16 text-gray-300" strokeWidth={1.5} />
+            </div>
+          </div>
+          
+          <h2 className="mt-6 text-2xl font-semibold text-gray-900">Your cart is empty</h2>
+          <p className="mt-2 text-gray-500">
+            Looks like you haven't added anything to your cart yet.
+          </p>
+          
+          <button
+            className="mt-8 w-full flex items-center justify-center gap-2 bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 transition duration-200"
+            onClick={() => window.history.back()}
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span>Continue Shopping</span>
+          </button>
+          
+          <p className="mt-4 text-sm text-gray-400">
+            Free shipping on all orders over $50
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">

@@ -1,166 +1,331 @@
-import React, { useState } from 'react';
-// Note: Import icons from your icon library
-import { Plus, Edit2, Trash2 } from 'lucide-react';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import toast from 'react-hot-toast';
+import { PARTNER_API_END_POINT } from '../../utils/constent';
+import { useSelector } from "react-redux";
 
-const ServiceManagement = () => {
-  const [services, setServices] = useState([
-    {
-      id: '1',
-      name: 'Website Development',
-      description: 'Full-stack website development with modern technologies',
-      price: 0, // Added placeholder value
-      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=1000',
-    },
-    // Add more sample services
-  ]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const initialServices = [
+  {
+    id: "1",
+    name: "Website Development",
+    description: "Professional website development services for businesses of all sizes.",
+    price: 1200,
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&q=80",
+  },
+  {
+    id: "2",
+    name: "Mobile App Development",
+    description: "Custom mobile applications for iOS and Android platforms.",
+    price: 2500,
+    image: "https://images.unsplash.com/photo-1526498460520-4c246339dccb?w=500&q=80",
+  },
+  {
+    id: "3",
+    name: "UI/UX Design",
+    description: "User-centered design services to enhance user experience and interface.",
+    price: 800,
+    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&q=80",
+  },
+];
+
+function ServiceManagement() {
+  const [services, setServices] = useState('');
+  const [activeTab, setActiveTab] = useState("all-services");
+  const partner  = useSelector((store) => store.partner.partnerInfo);
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    price: '',
-    image: '',
+    name: "",
+    description: "",
+    price: "",
+    serviceImage: "",
+    partnerId: partner?._id
   });
+  const [imagePreview, setImagePreview] = useState(null);
 
-  const handleSubmit = (e) => {
+  const fetchAllServices = async()=>{
+    try {
+      let partnerId = partner?._id
+      // console.log(partnerId);
+      const response = await axios.get(`${PARTNER_API_END_POINT}/partner/getServices`, {
+        params: { partnerId }, 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      });
+      // console.log(response.data);
+      if(response.data.success){
+        setServices(response.data.services);
+      }else{
+        return toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      return toast.error(error.response.data.message);
+    }
+  }
+  useEffect(() => {
+    fetchAllServices();
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setImagePreview(reader.result);
+  //       setFormData({ ...formData, serviceImage: reader.result });
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData(prev => ({
+        ...prev,
+        serviceImage: file
+      }));
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    const newService = {
-      id: (services.length + 1).toString(),
-      name: formData.name,
-      description: formData.description,
-      price: Number(formData.price),
-      image: formData.image,
-    };
-    setServices([...services, newService]);
-    setIsModalOpen(false);
-    setFormData({ name: '', description: '', price: '', image: '' });
+    
+    try {
+      // console.log(formData.serviceImage);
+      const response = await axios.post(`${PARTNER_API_END_POINT}/partner/addServices`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        withCredentials: true,
+      });
+      console.log(response)
+      if(response.data.success){
+        fetchAllServices();
+        setFormData({
+          name: "",
+          description: "",
+          price: "",
+          image: "",
+          partnerId : partner?._id
+        });
+        setImagePreview(null);
+        return toast.success(response.data.message);
+      }else{
+        return toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      return toast.error(error.response?.data?.message);
+    }
   };
 
   return (
-    <div className="bg-white text-black rounded-lg shadow-md p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-semibold">Services Management</h2>
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-blue-700 transition-colors"
-        >
-          <Plus size={20} />
-          <span>Add Service</span>
-        </button>
-      </div>
+    <div className="container mx-auto py-8 px-4  bg-white text-black">
+      <h1 className="text-3xl font-bold mb-8 text-center">Service Management</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {services.map((service) => (
-          <div key={service.id} className="border rounded-lg overflow-hidden">
-            <img
-              src={service.image}
-              alt={service.name}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-4">
-              <h3 className="text-lg font-semibold mb-2">{service.name}</h3>
-              <p className="text-gray-600 mb-3">{service.description}</p>
-              <p className="text-xl font-bold text-blue-600">${service.price}</p>
-              <div className="flex justify-end space-x-2 mt-4">
-                <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg">
-                  <Edit2 size={20} />
-                </button>
-                <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg">
-                  <Trash2 size={20} />
-                </button>
+      <div className="w-full">
+        <div className="grid w-full grid-cols-2 mb-8 border rounded-lg overflow-hidden">
+          <button
+            className={`py-2 px-4 text-center font-medium transition-colors ${
+              activeTab === "all-services"
+                ? "bg-black text-white"
+                : "bg-white text-black hover:bg-gray-100"
+            }`}
+            onClick={() => setActiveTab("all-services")}
+          >
+            All Services
+          </button>
+          <button
+            className={`py-2 px-4 text-center font-medium transition-colors ${
+              activeTab === "add-service"
+                ? "bg-black text-white"
+                : "bg-white text-black hover:bg-gray-100"
+            }`}
+            onClick={() => setActiveTab("add-service")}
+          >
+            Add New Service
+          </button>
+        </div>
+
+        {activeTab === "all-services" && (
+          <div className="space-y-4">
+            {services.length === 0 ? (
+              <div className="text-center py-12">
+                <h3 className="text-xl font-medium text-gray-600">No services found</h3>
+                <p className="mt-2">Add your first service to get started.</p>
               </div>
-            </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {services.map((service) => (
+                  <div
+                    key={service.id}
+                    className="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg"
+                  >
+                    <div className="aspect-video relative overflow-hidden">
+                      <img
+                        src={service.serviceImage}
+                        alt={service.name}
+                        className="object-cover w-full h-full transition-transform hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <div className="flex justify-between items-start pb-2">
+                        <h3 className="text-xl font-bold">{service.name}</h3>
+                        <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-semibold">
+                          ${service.price}
+                        </span>
+                      </div>
+                      <p className="text-gray-600 line-clamp-3">{service.description}</p>
+                      <div className="flex justify-end gap-2 mt-4">
+                        <button className="px-3 py-1 border border-gray-300 rounded-full text-sm hover:bg-gray-100 transition-colors">
+                          Edit
+                        </button>
+                        <button className="px-3 py-1 bg-red-50 text-red-600 border border-red-200 rounded-full text-sm hover:bg-red-100 transition-colors">
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        ))}
-      </div>
+        )}
 
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
-            <h3 className="text-xl font-semibold mb-4">Add New Service</h3>
-            <form onSubmit={handleSubmit}>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
+        {activeTab === "add-service" && (
+          <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md">
+            <div className="p-6 border-b">
+              <h2 className="text-2xl font-bold">Add New Service</h2>
+            </div>
+            <form onSubmit={handleSubmit} className="p-6">
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                     Service Name
                   </label>
                   <input
+                    id="name"
+                    name="name"
                     type="text"
+                    placeholder="Enter service name"
                     value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    className="mt-1 block w-full rounded-md bg-white border p-2 border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    onChange={handleChange}
                     required
-                    placeholder='Service Name'
+                    className="w-full px-3 py-2 border bg-white border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
+
+                <div className="space-y-2">
+                  <label htmlFor="description" className="block text-sm font-medium text-gray-700">
                     Description
                   </label>
                   <textarea
+                    id="description"
+                    name="description"
+                    placeholder="Describe your service"
+                    rows={4}
                     value={formData.description}
-                    onChange={(e) =>
-                      setFormData({ ...formData, description: e.target.value })
-                    }
-                    className="mt-1 block bg-white border p-2 w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    rows={3}
+                    onChange={handleChange}
                     required
-                    placeholder='Description'
+                    className="w-full px-3 py-2 border border-gray-400 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Price
+
+                <div className="space-y-2">
+                  <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+                    Price ($)
                   </label>
                   <input
+                    id="price"
+                    name="price"
                     type="number"
+                    placeholder="0.00"
+                    min="0"
+                    step="0.01"
                     value={formData.price}
-                    onChange={(e) =>
-                      setFormData({ ...formData, price: e.target.value })
-                    }
-                    className="mt-1 block bg-white border p-2 w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    onChange={handleChange}
                     required
-                    placeholder='Price'
+                    className="w-full px-3 py-2 border border-gray-400 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Image URL
+
+                <div className="space-y-2">
+                  <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+                    Service Image
                   </label>
-                  <input
-                    type="url"
-                    value={formData.image}
-                    onChange={(e) =>
-                      setFormData({ ...formData, image: e.target.value })
-                    }
-                    className="mt-1 block bg-white border p-2 w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                    required
-                  />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="border-2 border-dashed rounded-lg p-4 flex flex-col items-center justify-center text-center">
+                      <div className="mb-4 p-4 rounded-full bg-gray-100">
+                        <svg
+                          className="w-6 h-6 text-gray-600"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 4v16m8-8H4"
+                          />
+                        </svg>
+                      </div>
+                      <p className="mb-2 text-sm font-medium">Drag and drop or click to upload</p>
+                      <p className="text-xs text-gray-500 mb-4">SVG, PNG, JPG or GIF (max. 2MB)</p>
+                      <input
+                        id="image"
+                        type="file"
+                        className="hidden"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => document.getElementById("image").click()}
+                        className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      >
+                        Upload Image
+                      </button>
+                    </div>
+
+                    <div className="aspect-video relative rounded-lg overflow-hidden bg-gray-100">
+                      {imagePreview ? (
+                        <img
+                          src={imagePreview}
+                          alt="Preview"
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="flex items-center justify-center h-full text-gray-500">
+                          Image preview
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="mt-6 flex justify-end space-x-3">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
-                >
-                  Cancel
-                </button>
+
+              <div className="mt-6">
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  className="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Add Service
                 </button>
               </div>
             </form>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
-};
+}
 
 export default ServiceManagement;

@@ -8,9 +8,9 @@ import Signup from './components/Signup'
 import Temp from './components/Temp'
 import {Toaster} from 'react-hot-toast'
 import PartnersLandingPage from './components/partners_component/landingPage'
-import Add_Partners1 from './components/partners_component/Add_Partners_Step1'
-import Add_Partners2 from './components/partners_component/Add_Partners_Step2'
-import Add_Partners3 from './components/partners_component/Add_Partners_Step3'
+import Add_Partners1 from './components/partners_component/v1/Add_Partners_Step1'
+import Add_Partners2 from './components/partners_component/v1/Add_Partners_Step2'
+import Add_Partners3 from './components/partners_component/v1/Add_Partners_Step3'
 import Services from './components/Services'
 import PartnerDetail from './components/all_partners'
 import Select_partner from './components/Select_partner'
@@ -20,6 +20,8 @@ import LandingPage from './components/LandingPage'
 import Cart from './components/Cart'
 import ApplicationUnderReview from './components/partners_component/ApplicationUnderReview'
 import AppDashBoard from './components/dashboard/AppDashBoard'
+import PartnerRegistration from './components/partners_component/PartnerRegistration'
+import OTPLogin from './components/partners_component/OTPLogin'
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -78,6 +80,10 @@ function App() {
       element : <PartnersLandingPage/>
     },
     {
+      path : "/partner-registration",
+      element : <PartnerRegistration/>
+    },
+    {
       path : "/add-partner/step-1",
       element : <Add_Partners1/>
     },
@@ -94,8 +100,12 @@ function App() {
       element : <Services/>
     },
     {
-      path : "/dashboard",
+      path : "/partner/dashboard",
       element : <AppDashBoard/>
+    },
+    {
+      path : "/partner/login",
+      element : <OTPLogin/>
     }
   ])
   return (

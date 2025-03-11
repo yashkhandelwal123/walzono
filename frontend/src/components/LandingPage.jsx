@@ -21,7 +21,7 @@ export default function LandingPage() {
           <div className="flex justify-between h-16 items-center">
             <div className="flex items-center">
               <Scissors className="h-8 w-8 text-white mr-2" strokeWidth={2} />
-              <span className="text-xl font-bold">BeautyAtHome</span>
+              <span className="text-xl font-bold">Walzono</span>
             </div>
             
             {/* Desktop Menu */}

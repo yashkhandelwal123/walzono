@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getPartnerInfo } from "../../redux/userSlice";
+import { getPartnerInfo } from "../../../redux/userSlice";
 import { Link } from "react-router";
 import { useNavigate } from "react-router";
 

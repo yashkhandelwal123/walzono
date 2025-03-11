@@ -51,7 +51,7 @@ const LandingPage = () => {
         </p>
         <div className="flex justify-center">
           <Link
-            to={"/add-partner/step-1"}
+            to={"/partner-registration"}
             className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-4"
           >
             Register your parlour
