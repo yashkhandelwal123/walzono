@@ -3,14 +3,14 @@ import React from 'react';
 const OrderHistory = () => {
   // This would typically come from your backend
   const orders = [
-    {
-      id: '1',
-      customerName: 'John Doe',
-      service: 'Website Development',
-      amount: 0, // Added placeholder value
-      status: 'completed',
-      date: '2024-03-15',
-    },
+    // {
+    //   id: '1',
+    //   customerName: 'John Doe',
+    //   service: 'Website Development',
+    //   amount: 0, // Added placeholder value
+    //   status: 'completed',
+    //   date: '2024-03-15',
+    // },
     // Add more sample orders
   ];
 

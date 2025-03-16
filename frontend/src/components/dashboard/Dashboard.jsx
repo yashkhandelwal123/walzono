@@ -1,35 +1,35 @@
 import React from 'react';
-import { IndianRupee, ShoppingBag , Users, ChartNoAxesCombined } from 'lucide-react';
+import { IndianRupee, ShoppingBag , Users, ChartNoAxesCombined, IndianRupeeIcon } from 'lucide-react';
 
 
 const Dashboard = () => {
   const stats = [
     {
       title: 'Total Revenue',
-      value: '$15,240',
+      value: '₹0',
       icon: IndianRupee, // Replace with actual icon component
-      change: '+12.5%',
+      change: '+0%',
       trend: 'up',
     },
     {
       title: 'Total Orders',
-      value: '156',
+      value: '0',
       icon: ShoppingBag, // Replace with actual icon component
-      change: '+8.2%',
+      change: '+0%',
       trend: 'up',
     },
     {
       title: 'Active Customers',
-      value: '64',
+      value: '0',
       icon: Users, // Replace with actual icon component
-      change: '+5.1%',
+      change: '+0%',
       trend: 'up',
     },
     {
       title: 'Growth Rate',
-      value: '24.5%',
+      value: '0%',
       icon: ChartNoAxesCombined, // Replace with actual icon component
-      change: '+2.3%',
+      change: '+0%',
       trend: 'up',
     },
   ];

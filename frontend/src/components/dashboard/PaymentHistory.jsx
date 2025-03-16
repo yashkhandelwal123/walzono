@@ -3,14 +3,14 @@ import React from 'react';
 const PaymentHistory = () => {
   // This would typically come from your backend
   const payments = [
-    {
-      id: '1',
-      orderId: '1',
-      amount: 0, // Added placeholder value
-      status: 'success',
-      date: '2024-03-15',
-      method: 'Credit Card',
-    },
+    // {
+    //   id: '1',
+    //   orderId: '1',
+    //   amount: 0, // Added placeholder value
+    //   status: 'success',
+    //   date: '2024-03-15',
+    //   method: 'Credit Card',
+    // },
     // Add more sample payments
   ];
 

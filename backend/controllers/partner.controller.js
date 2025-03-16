@@ -272,9 +272,9 @@ exports.updatePartnerProfile = async (req, res) => {
 
 exports.addServices = async (req, res) => {
     try {
-        const { partnerId, name, description, price } = req.body;
+        const { partnerId, name, description, price, availableAtHome } = req.body;
         // console.log(req.body);
-        if (!partnerId || !name || !description || !price) {
+        if (!partnerId || !name || !description || !price || !availableAtHome) {
             return res.status(400).json({
                 success: false,
                 message: "All fields are required."
@@ -312,7 +312,8 @@ exports.addServices = async (req, res) => {
             description,
             price,
             serviceImage: uploadedImage.url,
-            partnerId: partner._id
+            partnerId: partner._id,
+            availableAtHome
         });
 
         if (!service) {

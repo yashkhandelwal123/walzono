@@ -22,6 +22,11 @@ const serviceSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Partner', // This links back to the Partner schema
     required: true
+  },
+  availableAtHome: {
+    type: Boolean,
+    default: false,
+    required: true
   }
 }, {
   timestamps: true

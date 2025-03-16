@@ -1,77 +1,58 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import toast from 'react-hot-toast';
-import { PARTNER_API_END_POINT } from '../../utils/constent';
-import { useSelector } from "react-redux";
+"use client"
 
-
-const initialServices = [
-  {
-    id: "1",
-    name: "Website Development",
-    description: "Professional website development services for businesses of all sizes.",
-    price: 1200,
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&q=80",
-  },
-  {
-    id: "2",
-    name: "Mobile App Development",
-    description: "Custom mobile applications for iOS and Android platforms.",
-    price: 2500,
-    image: "https://images.unsplash.com/photo-1526498460520-4c246339dccb?w=500&q=80",
-  },
-  {
-    id: "3",
-    name: "UI/UX Design",
-    description: "User-centered design services to enhance user experience and interface.",
-    price: 800,
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&q=80",
-  },
-];
+import { useEffect, useState } from "react"
+import axios from "axios"
+import toast from "react-hot-toast"
+import { PARTNER_API_END_POINT } from "../../utils/constent"
+import { useSelector } from "react-redux"
 
 function ServiceManagement() {
-  const [services, setServices] = useState('');
-  const [activeTab, setActiveTab] = useState("all-services");
-  const partner  = useSelector((store) => store.partner.partnerInfo);
+  const [services, setServices] = useState("")
+  const [activeTab, setActiveTab] = useState("all-services")
+  const partner = useSelector((store) => store.partner.partnerInfo)
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     price: "",
     serviceImage: "",
-    partnerId: partner?._id
-  });
-  const [imagePreview, setImagePreview] = useState(null);
+    partnerId: partner?._id,
+    availableAtHome: false,
+  })
+  const [imagePreview, setImagePreview] = useState(null)
 
-  const fetchAllServices = async()=>{
+  const fetchAllServices = async () => {
     try {
-      let partnerId = partner?._id
+      const partnerId = partner?._id
       // console.log(partnerId);
       const response = await axios.get(`${PARTNER_API_END_POINT}/partner/getServices`, {
-        params: { partnerId }, 
+        params: { partnerId },
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         withCredentials: true,
-      });
+      })
       // console.log(response.data);
-      if(response.data.success){
-        setServices(response.data.services);
-      }else{
-        return toast.error(response.data.message);
+      if (response.data.success) {
+        setServices(response.data.services)
+      } else {
+        return toast.error(response.data.message)
       }
     } catch (error) {
-      console.log(error);
-      return toast.error(error.response.data.message);
+      console.log(error)
+      return toast.error(error.response.data.message)
     }
   }
   useEffect(() => {
-    fetchAllServices();
-  }, []);
+    fetchAllServices()
+  }, [])
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const { name, value, type, checked } = e.target
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    })
+  }
 
   // const handleImageChange = (e) => {
   //   const file = e.target.files[0];
@@ -85,46 +66,47 @@ function ServiceManagement() {
   //   }
   // };
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     if (file) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        serviceImage: file
-      }));
-      setImagePreview(URL.createObjectURL(file));
+        serviceImage: file,
+      }))
+      setImagePreview(URL.createObjectURL(file))
     }
-  };
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
     try {
       // console.log(formData.serviceImage);
       const response = await axios.post(`${PARTNER_API_END_POINT}/partner/addServices`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          "Content-Type": "multipart/form-data",
         },
         withCredentials: true,
-      });
+      })
       console.log(response)
-      if(response.data.success){
-        fetchAllServices();
+      if (response.data.success) {
+        fetchAllServices()
         setFormData({
           name: "",
           description: "",
           price: "",
           image: "",
-          partnerId : partner?._id
-        });
-        setImagePreview(null);
-        return toast.success(response.data.message);
-      }else{
-        return toast.error(response.data.message);
+          partnerId: partner?._id,
+          availableAtHome: false,
+        })
+        setImagePreview(null)
+        return toast.success(response.data.message)
+      } else {
+        return toast.error(response.data.message)
       }
     } catch (error) {
-      console.log(error);
-      return toast.error(error.response?.data?.message);
+      console.log(error)
+      return toast.error(error.response?.data?.message)
     }
-  };
+  }
 
   return (
     <div className="container mx-auto py-8 px-4  bg-white text-black">
@@ -134,9 +116,7 @@ function ServiceManagement() {
         <div className="grid w-full grid-cols-2 mb-8 border rounded-lg overflow-hidden">
           <button
             className={`py-2 px-4 text-center font-medium transition-colors ${
-              activeTab === "all-services"
-                ? "bg-black text-white"
-                : "bg-white text-black hover:bg-gray-100"
+              activeTab === "all-services" ? "bg-black text-white" : "bg-white text-black hover:bg-gray-100"
             }`}
             onClick={() => setActiveTab("all-services")}
           >
@@ -144,9 +124,7 @@ function ServiceManagement() {
           </button>
           <button
             className={`py-2 px-4 text-center font-medium transition-colors ${
-              activeTab === "add-service"
-                ? "bg-black text-white"
-                : "bg-white text-black hover:bg-gray-100"
+              activeTab === "add-service" ? "bg-black text-white" : "bg-white text-black hover:bg-gray-100"
             }`}
             onClick={() => setActiveTab("add-service")}
           >
@@ -170,7 +148,7 @@ function ServiceManagement() {
                   >
                     <div className="aspect-video relative overflow-hidden">
                       <img
-                        src={service.serviceImage}
+                        src={service.serviceImage || "/placeholder.svg"}
                         alt={service.name}
                         className="object-cover w-full h-full transition-transform hover:scale-105"
                       />
@@ -183,6 +161,25 @@ function ServiceManagement() {
                         </span>
                       </div>
                       <p className="text-gray-600 line-clamp-3">{service.description}</p>
+                      {service.availableAtHome && (
+                        <div className="mt-2 flex items-center text-green-600">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4 mr-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M3 12l2-2m0 0l7-7 7 7m-7-7v14"
+                            />
+                          </svg>
+                          <span className="text-xs font-medium">Available at home</span>
+                        </div>
+                      )}
                       <div className="flex justify-end gap-2 mt-4">
                         <button className="px-3 py-1 border border-gray-300 rounded-full text-sm hover:bg-gray-100 transition-colors">
                           Edit
@@ -257,35 +254,38 @@ function ServiceManagement() {
                 </div>
 
                 <div className="space-y-2">
+                  <div className="flex items-center">
+                    <input
+                      id="availableAtHome"
+                      name="availableAtHome"
+                      type="checkbox"
+                      checked={formData.availableAtHome}
+                      onChange={(e) => setFormData({ ...formData, availableAtHome: e.target.checked })}
+                      className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    />
+                    <label htmlFor="availableAtHome" className="ml-2 block text-sm font-medium text-gray-700">
+                      Available at customer's home
+                    </label>
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    Check this if you can provide this service at the customer's location
+                  </p>
+                </div>
+
+                <div className="space-y-2">
                   <label htmlFor="image" className="block text-sm font-medium text-gray-700">
                     Service Image
                   </label>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="border-2 border-dashed rounded-lg p-4 flex flex-col items-center justify-center text-center">
                       <div className="mb-4 p-4 rounded-full bg-gray-100">
-                        <svg
-                          className="w-6 h-6 text-gray-600"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 4v16m8-8H4"
-                          />
+                        <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                         </svg>
                       </div>
                       <p className="mb-2 text-sm font-medium">Drag and drop or click to upload</p>
                       <p className="text-xs text-gray-500 mb-4">SVG, PNG, JPG or GIF (max. 2MB)</p>
-                      <input
-                        id="image"
-                        type="file"
-                        className="hidden"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                      />
+                      <input id="image" type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
                       <button
                         type="button"
                         onClick={() => document.getElementById("image").click()}
@@ -298,14 +298,12 @@ function ServiceManagement() {
                     <div className="aspect-video relative rounded-lg overflow-hidden bg-gray-100">
                       {imagePreview ? (
                         <img
-                          src={imagePreview}
+                          src={imagePreview || "/placeholder.svg"}
                           alt="Preview"
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <div className="flex items-center justify-center h-full text-gray-500">
-                          Image preview
-                        </div>
+                        <div className="flex items-center justify-center h-full text-gray-500">Image preview</div>
                       )}
                     </div>
                   </div>
@@ -325,7 +323,7 @@ function ServiceManagement() {
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default ServiceManagement;
+export default ServiceManagement

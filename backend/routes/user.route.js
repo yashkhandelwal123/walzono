@@ -10,8 +10,5 @@ const partnerController = require('../controllers/partner.controller');
 router.post('/user-register',userController.register);
 router.post('/login',userController.login);
 router.get('/logout',userController.logout);
-
-
-// testing email
-router.post('/send-email',userController.send);
+router.post('/contact',userController.contactUs);
 module.exports = router;

@@ -6,6 +6,7 @@ import {toast} from 'react-hot-toast'
 import { useNavigate } from 'react-router';
 import {useDispatch} from 'react-redux';
 import { getPartner } from '../../redux/partnerSlice';
+import { Link } from 'react-router-dom';
 
 
 function OTPLogin() {
@@ -43,7 +44,7 @@ function OTPLogin() {
         
     } catch (error) {
         console.log(error)
-        toast.error("Error while sending OTP.")
+        toast.error(error.response.data.message)
         setIsLoading(false);
         return;
     }
@@ -153,6 +154,7 @@ function OTPLogin() {
                   </>
                 )}
               </button>
+              <Link to={'/partner/register'} className='flex justify-center text-sm text-blue-600 text-bold hover:text-blue-900 items-center transition-colors '>Don't have an account? Register</Link>
             </form>
           </div>
         )}

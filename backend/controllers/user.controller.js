@@ -1,14 +1,9 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const { Resend } = require("resend");
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-// const { render } = require("@react-email/render");
-// const CustomTemplate = require("../emails/applicationReviewEmail");
 
 const sendEmail = require('../config/mailer');
-const emailTemplate = require("../emails/emailTemplate");
+const emailTemplate = require("../emails/EmailForInquiry");
 
 exports.register = async(req,res)=>{
     try{
@@ -279,4 +274,38 @@ exports.send = async (req, res) => {
     res.status(500).json({ error: "Failed to send email" });
   }
 };
+
+exports.contactUs = async (req, res) => {
+    const {name , email, subject, message} = req.body;
+
+    if(!name || !email || !subject || !message){
+        return res.status(400).json({
+            success : false,
+            message : "All fields are required."
+        })
+    }
+
+    try {
+            const htmlContent = emailTemplate(name , email , subject , message);
+            try {
+                await sendEmail('shubham2002jindal@gmail.com', "Email for Inquiry Form Walzono", htmlContent);
+                // res.status(200).json({ success: "Email sent successfully" });
+            } catch (error) {
+                return res.status(500).json({ 
+                    success: false,
+                    error: "Failed to send email"
+                });
+            }
+    
+            return res.status(200).json({
+                success: true,
+                message: "Message Send.",
+            });
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: "Internal server error."
+            })
+        }
+}
 
