@@ -1,3 +1,5 @@
 name = "your-worker"
-main = "index.js"
+type = "javascript"
+main = "./backend/index.js"
+workers_dev = true
 compatibility_date = "2025-03-17"
